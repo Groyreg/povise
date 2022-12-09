@@ -1,0 +1,38 @@
+module.exports = {
+  bracketSpacing: true,
+  singleQuote: true,
+  jsxSingleQuote: false,
+  tabWidth: 2,
+  trailingComma: 'all',
+  printWidth: 120,
+  parser: 'typescript',
+  semi: true,
+  overrides: [
+    {
+      files: ['*.html'],
+      options: {
+        parser: 'html',
+      },
+    },
+    {
+      files: ['*.js', '*.cjs', '*.mjs'],
+      options: {
+        parser: 'flow',
+      },
+    },
+
+    {
+      files: '*.ts',
+      options: {
+        parser: 'typescript',
+      },
+    },
+
+    {
+      files: ['*.json', '*.jsonc', '.babelrc', '.prettierrc', '.eslintrc'],
+      options: {
+        parser: 'json',
+      },
+    },
+  ],
+};
