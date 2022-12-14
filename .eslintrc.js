@@ -48,13 +48,22 @@ module.exports = {
     },
     sourceType: 'module',
   },
-  plugins: ['@typescript-eslint', 'react', 'simple-import-sort', 'sort-keys-fix', 'typescript-sort-keys', 'lint-local'],
+  plugins: [
+    '@typescript-eslint',
+    'react',
+    'simple-import-sort',
+    'sort-keys-fix',
+    'typescript-sort-keys',
+    'lint-local',
+    'better-styled-components',
+  ],
   root: true,
   rules: {
     '@typescript-eslint/explicit-function-return-type': 'error', // return function type
     '@typescript-eslint/no-empty-function': 'off',
     '@typescript-eslint/no-explicit-any': 'warn',
     '@typescript-eslint/no-unused-vars': 'error',
+    'better-styled-components/sort-declarations-alphabetically': 'error',
     'import/extensions': [
       // initial config
       'error',
@@ -103,11 +112,12 @@ module.exports = {
     ],
     'react/function-component-definition': ['error', { namedComponents: 'arrow-function' }],
     'react/jsx-filename-extension': ['error', { extensions: ['.tsx', '.ts', '.js', '.jsx'] }], // initial config
-    'react/jsx-one-expression-per-line': 'off', // conflict with prettier
-    'react/react-in-jsx-scope': 'off', // initial config
+    'react/jsx-one-expression-per-line': 'off', // initial config
+    'react/jsx-sort-props': 'error',
+    'react/react-in-jsx-scope': 'off',
     'simple-import-sort/exports': 'error',
     'simple-import-sort/imports': 'error',
-    'sort-keys': ['error', 'asc', { caseSensitive: true, minKeys: 2, natural: true }],
+    'sort-keys': ['error', 'asc', { allowLineSeparatedGroups: true, caseSensitive: true, minKeys: 2, natural: true }],
     'sort-keys-fix/sort-keys-fix': 'error',
     'typescript-sort-keys/interface': 'error',
     'typescript-sort-keys/string-enum': 'error',

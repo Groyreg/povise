@@ -29,7 +29,7 @@ module.exports = {
     },
 
     {
-      files: ['*.json', '*.jsonc', '.babelrc', '.prettierrc', '.eslintrc'],
+      files: ['*.json', '*.jsonc', '.babelrc', '.prettierrc', '.eslintrc', '.stylelintrc'],
       options: {
         parser: 'json',
       },

@@ -17,4 +17,7 @@ module.exports = {
   webpack: {
     alias: getAlias(),
   },
+  babel: {
+    plugins: [process.env.NODE_ENV !== 'production' && 'babel-plugin-styled-components'].filter(Boolean),
+  },
 };

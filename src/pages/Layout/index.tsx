@@ -1,6 +1,8 @@
 import React, { ReactElement, useEffect } from 'react';
 import { useTheme } from '@app/themes/context';
 
+import { Wrapper } from './styles';
+
 const Layout = (): ReactElement => {
   const { toggle } = useTheme();
 
@@ -10,7 +12,7 @@ const Layout = (): ReactElement => {
 
   useEffect(onInit, []);
 
-  return <div>Layout Page</div>;
+  return <Wrapper>Layout Page</Wrapper>;
 };
 
 export default Layout;
