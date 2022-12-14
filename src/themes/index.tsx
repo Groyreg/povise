@@ -18,7 +18,7 @@ const MyThemeProvider = ({ children }: IProvider): ReactElement => {
     toggle,
   });
 
-  const data = useMemo(updateData, [themeMode, toggle]);
+  const data: IThemeToggle = useMemo(updateData, [themeMode, toggle]);
 
   return (
     <ThemeToggleContext.Provider value={data}>

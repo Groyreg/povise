@@ -82,7 +82,6 @@ module.exports = {
         reactHooksCallbackMaxLines: 1,
       },
     ],
-
     'lint-local/group-hooks': ['error'],
     'lint-local/hooks-typings': 'error',
     'lint-local/no-inline-callbacks': 'error',
@@ -90,8 +89,11 @@ module.exports = {
     'lint-local/no-statement-inside-statements': 'error',
     'lint-local/sort-methods': 'error',
     'lint-local/spacing-control': 'error',
+    'max-len': 'off',
     'newline-before-return': 'error',
     'no-console': 'warn',
+    'no-unused-expressions': 'off',
+    'no-use-before-define': 'off',
     'no-useless-return': 'error',
     'object-curly-newline': 'off',
     'prefer-destructuring': [
