@@ -24,4 +24,4 @@ const setContainerStyles = ({ theme }: IStyles): FlattenSimpleInterpolation => c
 `;
 
 export const Wrapper = styled.div(setWrapperStyles);
-export const Container = styled.div(setContainerStyles);
+export const Container = styled.form(setContainerStyles);

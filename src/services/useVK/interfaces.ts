@@ -1,7 +1,10 @@
 export interface IUseVKData {
   authData: IAuthResponse | null;
+  isAuthLoading: boolean;
   isError: boolean;
-  isLoading: boolean;
+  isVideoLoading: boolean;
+  searchVideos: (params: IVideoRequest) => void;
+  videoData: IVideo[];
 }
 
 export interface IAuthResponse {

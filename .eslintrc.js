@@ -59,11 +59,14 @@ module.exports = {
   ],
   root: true,
   rules: {
-    '@typescript-eslint/explicit-function-return-type': 'error', // return function type
-    '@typescript-eslint/no-empty-function': 'off',
+    '(jsx-a11y/no-static-element-interactions': 'off',
+    '@typescript-eslint/explicit-function-return-type': 'error',
+    // return function type
+'@typescript-eslint/no-empty-function': 'off',
     '@typescript-eslint/no-explicit-any': 'warn',
     '@typescript-eslint/no-unused-vars': 'error',
     'better-styled-components/sort-declarations-alphabetically': 'error',
+    'implicit-arrow-linebreak': 'off',
     'import/extensions': [
       // initial config
       'error',
@@ -75,6 +78,9 @@ module.exports = {
     ],
     'import/no-cycle': 'off',
     'import/prefer-default-export': 'off',
+    indent: 'off',
+    'jsx-a11y/click-events-have-key-events': 'off',
+    'jsx-a11y/no-static-element-interactions': 'off',
     'lint-local/custom-max-lines-per-function': [
       'error',
       {
@@ -97,6 +103,7 @@ module.exports = {
     'no-use-before-define': 'off',
     'no-useless-return': 'error',
     'object-curly-newline': 'off',
+    'operator-linebreak': 'off',
     'prefer-destructuring': [
       'error',
       {

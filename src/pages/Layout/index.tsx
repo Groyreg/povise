@@ -1,6 +1,5 @@
-import React, { createContext, ReactElement, useEffect, useMemo } from 'react';
+import React, { createContext, ReactElement, useMemo } from 'react';
 import useVK from '@app/services/useVK';
-import { useTheme } from '@app/themes/context';
 import Showcase from '@pages/Layout/components/Showcase';
 
 import Navbar from './components/Navbar';
@@ -11,25 +10,17 @@ import { Wrapper } from './styles';
 export const AppContext = createContext<IAppContext>(DEFAULT_CONTEXT);
 
 const Layout = (): ReactElement => {
-  const { authData, isLoading } = useVK();
+  const { authData, isAuthLoading, videoData, searchVideos, isVideoLoading } = useVK();
 
-  const { toggle } = useTheme();
+  const setContext = (): IAppContext => ({ authData, isAuthLoading });
 
-  const onInit = (): void => {
-    toggle();
-  };
-
-  const setContext = (): IAppContext => ({ authData, isAuthLoading: isLoading });
-
-  const contextData = useMemo(setContext, [authData, isLoading]);
-
-  useEffect(onInit, []);
+  const contextData = useMemo(setContext, [authData, isAuthLoading]);
 
   return (
     <AppContext.Provider value={contextData}>
       <Wrapper>
-        <Navbar />
-        <Showcase />
+        <Navbar searchVideos={searchVideos} />
+        <Showcase isVideoLoading={isVideoLoading} videoData={videoData} />
       </Wrapper>
     </AppContext.Provider>
   );

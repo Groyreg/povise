@@ -1,7 +1,20 @@
 import { IStyles } from '@app/themes/interfaces';
-import styled from 'styled-components';
+import styled, { css, FlattenSimpleInterpolation } from 'styled-components';
 
 const breakpointOnlyMobile = ({ theme }: IStyles): string => theme.media.onlyMobile;
+
+const setNameStyles = ({ theme }: IStyles): FlattenSimpleInterpolation => css`
+  color: ${theme.colors.text};
+  font-size: 18px;
+  margin: 0;
+  padding: 0;
+
+  @media ${breakpointOnlyMobile({ theme })} {
+    display: none;
+  }
+`;
+
+export const Name = styled.p(setNameStyles);
 
 export const Wrapper = styled.div`
   align-items: center;
@@ -15,17 +28,6 @@ export const Avatar = styled.img`
   height: 25px;
   margin-right: 8px;
   width: 25px;
-`;
-
-export const Name = styled.p`
-  color: white;
-  font-size: 18px;
-  margin: 0;
-  padding: 0;
-
-  @media ${breakpointOnlyMobile} {
-    display: none;
-  }
 `;
 
 export const Block = styled.div`

@@ -6,4 +6,4 @@ const overrideInputStyles = ({ theme }: IStyles): FlattenSimpleInterpolation => 
   background-color: ${theme.colors.accent};
 `;
 
-export const OverrideInput = styled(Input.Search)(overrideInputStyles);
+export const OverrideInput = styled(Input)(overrideInputStyles);

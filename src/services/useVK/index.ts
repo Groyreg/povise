@@ -1,22 +1,26 @@
 import { useEffect, useState } from 'react';
 import timestampToDate from '@utils/timestampToDate';
+import moment from 'moment';
 import Cookies from 'universal-cookie';
 
 import {
   IAuthResponse,
+  ISearchVideoResponse,
   IUserData,
   IUseVKData,
+  IVideo,
   IVideoRequest,
   TCallbackLogin,
-  TCallbackSearchVideo,
-  TCallbackUser,
+  // TCallbackSearchVideo,
+  // TCallbackUser,
 } from './interfaces';
 
 declare global {
   interface Window {
     VK: {
       Api: {
-        call: (type: string, data: IUserData | IVideoRequest, callback: TCallbackUser | TCallbackSearchVideo) => void;
+        // call: (type: string, data: IUserData | IVideoRequest, callback: TCallbackUser | TCallbackSearchVideo) => void;
+        call: (type: string, data: IUserData | IVideoRequest, callback: any) => void;
       };
       Auth: {
         login: (callback: TCallbackLogin, type: number) => void;
@@ -32,7 +36,9 @@ const useVK = (): IUseVKData => {
   const authDataInitial = null;
 
   const [authData, setAuthData] = useState<IAuthResponse | null>(authDataInitial);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [videoData, setVideoData] = useState<IVideo[]>([]);
+  const [isAuthLoading, setIsAuthLoading] = useState<boolean>(false);
+  const [isVideoLoading, setIsVideoLoading] = useState<boolean>(false);
   const [isError, setIsError] = useState<boolean>(false);
 
   const isAuth = (): boolean => {
@@ -73,7 +79,7 @@ const useVK = (): IUseVKData => {
       return;
     }
 
-    setIsLoading(!authData);
+    setIsAuthLoading(!authData);
   };
 
   const init = (): void => {
@@ -88,27 +94,62 @@ const useVK = (): IUseVKData => {
   };
 
   const handleInit = (): void => {
-    setIsLoading(true);
+    setIsAuthLoading(true);
 
     init();
   };
 
   const handleAuth = (): void => {
-    if (!isLoading) {
+    if (!isAuthLoading) {
       return;
     }
 
     !isAuth() && auth(updateAuthData);
   };
 
+  const formatVideoData =
+    (params: IVideoRequest) =>
+    ({ response: { items } }: ISearchVideoResponse) => {
+      const notZeroDuration = ({ duration }: IVideo): boolean => duration !== '0:0';
+      const formatVideo = (video: IVideo): IVideo => ({
+        ...video,
+        date: typeof video.date === 'number' ? moment(new Date(video.date * 1000).toString()).fromNow() : video.date,
+        duration: `${Math.trunc(parseInt(video.duration.toString(), 10) / 60)}:${
+          parseInt(video.duration.toString(), 10) % 60
+        }`,
+      });
+
+      const formattedVideos = items.map(formatVideo).filter(notZeroDuration);
+      const updatedVideo = (prevState: IVideo[]): IVideo[] => [...prevState, ...formattedVideos];
+
+      setVideoData(updatedVideo);
+
+      if (params.offset < 1000) {
+        const newParams = { ...params, offset: params.offset + 200 };
+
+        searchVideos(newParams);
+      } else {
+        setIsVideoLoading(false);
+      }
+    };
+
+  const searchVideos = (params: IVideoRequest): void => {
+    setIsVideoLoading(true);
+    window.VK.Api.call('video.search', params, formatVideoData(params));
+  };
+
   useEffect(handleInit, []);
-  useEffect(handleAuth, [isLoading]);
+  useEffect(handleAuth, [isAuthLoading]);
   useEffect(updateState, [authData]);
+  console.log({ isVideoLoading, videoData });
 
   return {
     authData,
+    isAuthLoading,
     isError,
-    isLoading,
+    isVideoLoading,
+    searchVideos,
+    videoData,
   };
 };
 
