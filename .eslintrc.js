@@ -73,6 +73,7 @@ module.exports = {
         tsx: 'never',
       },
     ],
+    'import/no-cycle': 'off',
     'import/prefer-default-export': 'off',
     'lint-local/custom-max-lines-per-function': [
       'error',
@@ -113,8 +114,10 @@ module.exports = {
       },
     ],
     'react/function-component-definition': ['error', { namedComponents: 'arrow-function' }],
+    'react/jsx-boolean-value': ['error', 'always'],
     'react/jsx-filename-extension': ['error', { extensions: ['.tsx', '.ts', '.js', '.jsx'] }], // initial config
-    'react/jsx-one-expression-per-line': 'off', // initial config
+    'react/jsx-one-expression-per-line': 'off',
+    'react/jsx-props-no-spreading': 'off', // initial config
     'react/jsx-sort-props': 'error',
     'react/react-in-jsx-scope': 'off',
     'simple-import-sort/exports': 'error',

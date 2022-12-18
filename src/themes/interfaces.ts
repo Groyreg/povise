@@ -6,6 +6,7 @@ export interface IColors {
   dynamic: string;
   primary: string;
   secondary: string;
+  text: string;
 }
 
 export interface ISizes {
@@ -18,6 +19,7 @@ export interface ISizes {
 
 export interface ITheme {
   colors: IColors;
+  media: IMedia;
   sizes: ISizes;
 }
 
@@ -32,4 +34,15 @@ export interface IProvider {
 
 export interface IThemeToggle {
   toggle: () => void;
+}
+
+export interface IStyles {
+  theme: ITheme;
+}
+
+export interface IMedia {
+  desktop: string;
+  onlyMobile: string;
+  onlyTablet: string;
+  tablet: string;
 }
