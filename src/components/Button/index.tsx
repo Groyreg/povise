@@ -1,10 +1,10 @@
 import React, { ReactElement } from 'react';
-import { ButtonProps } from 'antd';
 
+import { IProps } from './interfaces';
 import { ButtonImported } from './styles';
 
-const Button = ({ children, type = 'primary', ...buttonProps }: ButtonProps): ReactElement => (
-  <ButtonImported type={type} {...buttonProps}>
+const Button = ({ children, type = 'primary', isFullWidth, ...buttonProps }: IProps): ReactElement => (
+  <ButtonImported $isFullWidth={isFullWidth} type={type} {...buttonProps}>
     {children}
   </ButtonImported>
 );

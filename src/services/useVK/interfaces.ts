@@ -3,7 +3,7 @@ export interface IUseVKData {
   isAuthLoading: boolean;
   isError: boolean;
   isVideoLoading: boolean;
-  searchVideos: (params: IVideoRequest) => void;
+  searchVideos: (params: IVideoRequest, isSearchAll: boolean) => void;
   videoData: IVideo[];
 }
 
@@ -66,6 +66,7 @@ export interface IVideo {
   can_subscribe: number;
   comments: number;
   date: number | string;
+  dateForCompare: Date;
   description: string;
   duration: number | string;
   first_frame: IImageOfVideo[];

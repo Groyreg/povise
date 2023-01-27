@@ -59,7 +59,6 @@ module.exports = {
   ],
   root: true,
   rules: {
-    '(jsx-a11y/no-static-element-interactions': 'off',
     '@typescript-eslint/explicit-function-return-type': 'error',
     // return function type
 '@typescript-eslint/no-empty-function': 'off',

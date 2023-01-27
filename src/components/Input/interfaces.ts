@@ -1,8 +1,7 @@
-import { ChangeEvent, KeyboardEvent, MouseEvent, ReactNode } from 'react';
+import { ChangeEvent, KeyboardEvent, MouseEvent } from 'react';
 import { InputProps } from 'antd';
 
 export interface IProps extends InputProps {
-  enterButton?: ReactNode;
   inputPrefixCls?: string;
   loading?: boolean;
   onSearch?: (

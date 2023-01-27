@@ -3,10 +3,12 @@ import { ReactNode } from 'react';
 export interface IColors {
   accent: string;
   background: string;
+  black: string;
   dynamic: string;
   primary: string;
   secondary: string;
   text: string;
+  white: string;
 }
 
 export interface ISizes {

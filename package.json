@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "start": "dotenv -e .env.dev craco start",
-    "build": "dotenv -e .env.prod craco start",
+    "build": "dotenv -e .env.prod craco build",
     "lint": "npx eslint src  --fix"
   },
   "dependencies": {

@@ -1,4 +1,5 @@
-import { IVideoRequest } from '@app/services/useVK/interfaces';
+import { IVideo, IVideoRequest } from '@app/services/useVK/interfaces';
+import type { CheckboxChangeEvent } from 'antd/es/checkbox';
 
 export interface IForm {
   count: number;
@@ -11,5 +12,11 @@ export interface IForm {
 }
 
 export interface IProps {
-  searchVideos: (params: IVideoRequest) => void;
+  is2k: boolean;
+  is4k: boolean;
+  isFullHD: boolean;
+  isHD: boolean;
+  onCheckboxChange: (event: CheckboxChangeEvent) => void;
+  searchVideos: (params: IVideoRequest, isSearchAll: boolean) => void;
+  videoData: IVideo[];
 }

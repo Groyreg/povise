@@ -106,42 +106,62 @@ const useVK = (): IUseVKData => {
 
     !isAuth() && auth(updateAuthData);
   };
-
+  /* eslint-disable */
   const formatVideoData =
-    (params: IVideoRequest) =>
+    (params: IVideoRequest, isSearchAll: boolean) =>
     ({ response: { items } }: ISearchVideoResponse) => {
       const notZeroDuration = ({ duration }: IVideo): boolean => duration !== '0:0';
       const formatVideo = (video: IVideo): IVideo => ({
         ...video,
         date: typeof video.date === 'number' ? moment(new Date(video.date * 1000).toString()).fromNow() : video.date,
+        dateForCompare: typeof video.date === 'number' ? new Date(video.date * 1000) : new Date(),
         duration: `${Math.trunc(parseInt(video.duration.toString(), 10) / 60)}:${
           parseInt(video.duration.toString(), 10) % 60
         }`,
       });
 
       const formattedVideos = items.map(formatVideo).filter(notZeroDuration);
-      const updatedVideo = (prevState: IVideo[]): IVideo[] => [...prevState, ...formattedVideos];
+      const updatedVideo = (prevState: IVideo[]): IVideo[] => {
+        const toUniq = ({ image }: IVideo, index: number, arr: IVideo[]): boolean => {
+          const img = image[0]?.url;
+          const compareWithImg = ({ image: comparedImg }: IVideo): boolean => comparedImg[0]?.url === img;
+          const { length: videosWithThisImgLength = 0 } = arr.filter(compareWithImg);
+
+          return videosWithThisImgLength <= 1;
+        };
+
+        return [...prevState, ...formattedVideos].filter(toUniq);
+      };
 
       setVideoData(updatedVideo);
 
       if (params.offset < 1000) {
         const newParams = { ...params, offset: params.offset + 200 };
 
-        searchVideos(newParams);
+        callApiSearch(newParams, isSearchAll);
+      } else if (params.sort === 0 && isSearchAll) {
+        const newParams = { ...params, offset: 0, sort: 2 };
+
+        callApiSearch(newParams, isSearchAll);
       } else {
         setIsVideoLoading(false);
       }
     };
+  /* eslint-enable */
 
-  const searchVideos = (params: IVideoRequest): void => {
+  const searchVideos = (params: IVideoRequest, isSearchAll: boolean): void => {
+    setVideoData([]);
     setIsVideoLoading(true);
-    window.VK.Api.call('video.search', params, formatVideoData(params));
+    callApiSearch(params, isSearchAll);
+  };
+
+  const callApiSearch = (params: IVideoRequest, isSearchAll: boolean): void => {
+    window.VK.Api.call('video.search', params, formatVideoData(params, isSearchAll));
   };
 
   useEffect(handleInit, []);
   useEffect(handleAuth, [isAuthLoading]);
   useEffect(updateState, [authData]);
-  console.log({ isVideoLoading, videoData });
 
   return {
     authData,
