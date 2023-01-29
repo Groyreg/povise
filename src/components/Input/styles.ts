@@ -15,7 +15,7 @@ const overrideInputStyles = (): FlattenSimpleInterpolation => css`
   border: none;
   border-radius: 0.5rem;
   box-shadow: inset 0.2rem 0.2rem 0.5rem #c8d0e7, inset -0.2rem -0.2rem 0.5rem #ffffff;
-  height: 2.7rem;
+  height: 42px;
 
   input {
     background: transparent;
@@ -41,3 +41,6 @@ const overrideInputStyles = (): FlattenSimpleInterpolation => css`
 `;
 
 export const OverrideInput = styled(Input)(overrideInputStyles);
+export const Wrapper = styled.div`
+  position: relative;
+`;

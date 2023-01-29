@@ -1,4 +1,5 @@
 import React, { ReactElement, useState } from 'react';
+import { useSwipeable } from 'react-swipeable';
 import Checkbox from '@components/Checkbox';
 import Input from '@components/Input';
 import Tabs from '@components/Tabs';
@@ -10,10 +11,23 @@ import Header from '../Header';
 
 import { DEFAULT_FORM_VALUES, DEFAULT_TABS } from './constants';
 import { IForm, IProps } from './interfaces';
-import { Button, Checkboxes, Container, Divider, SearchForm, Text, Wrapper } from './styles';
+import { AdditionalContainer, Button, Checkboxes, Container, Divider, SearchForm, Text, Wrapper } from './styles';
 
 const Navbar = ({ searchVideos, videoData, onCheckboxChange, is4k, isHD, isFullHD, is2k }: IProps): ReactElement => {
   const [tabs, setTabs] = useState<ITab[]>(DEFAULT_TABS);
+  const [isOpenedInMobile, setIsOpenedInMobile] = useState<boolean>(false);
+
+  const handlers = useSwipeable({
+    onSwipedDown: () => {
+      setIsOpenedInMobile(false);
+    },
+    onSwipedUp: () => {
+      setIsOpenedInMobile(true);
+    },
+    preventScrollOnSwipe: true,
+    swipeDuration: 500,
+    trackMouse: true,
+  });
 
   const onSubmit = (values: IForm): void => {
     const sorting = tabs.find(({ isActive }) => isActive)?.value || 0;
@@ -46,30 +60,31 @@ const Navbar = ({ searchVideos, videoData, onCheckboxChange, is4k, isHD, isFullH
 
   const {
     values: { search },
-    // values: { search, isAdult, sorting, shorter, longer },
     handleChange,
     handleSubmit,
   } = useFormik(form);
 
   return (
-    <Wrapper>
+    <Wrapper isOpenedInMobile={isOpenedInMobile} {...handlers}>
       <Container>
         <SearchForm onSubmit={handleSubmit}>
           <Header />
-          <Tabs onChange={setTabs} tabs={tabs} />
-          <Divider />
-          <Input
-            id="search"
-            name="search"
-            onChange={handleChange}
-            placeholder="Search"
-            style={{
-              width: '100%',
-            }}
-            value={search}
-          />
+          <AdditionalContainer>
+            <Tabs onChange={setTabs} tabs={tabs} />
+            <Divider />
+            <Input
+              id="search"
+              name="search"
+              onChange={handleChange}
+              placeholder="Search"
+              style={{
+                width: '100%',
+              }}
+              value={search}
+            />
+          </AdditionalContainer>
           <Button isFullWidth={true} onClick={onAllSearch}>
-            Default search
+            DEFAULT SEARCH
           </Button>
         </SearchForm>
         <Text>Найдено: {videoData.length}</Text>

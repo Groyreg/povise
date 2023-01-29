@@ -20,3 +20,7 @@ export interface IProps {
   searchVideos: (params: IVideoRequest, isSearchAll: boolean) => void;
   videoData: IVideo[];
 }
+
+export interface INavBarStyles {
+  isOpenedInMobile: boolean;
+}

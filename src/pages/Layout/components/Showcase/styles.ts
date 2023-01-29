@@ -7,9 +7,13 @@ const setWrapperStyles = ({ theme }: IStyles): FlattenSimpleInterpolation => css
   display: flex;
   flex-wrap: wrap;
   height: 100%;
-  justify-content: center;
-  padding: 30px 30px 30px 390px;
+  justify-content: space-evenly;
+  padding: 15px 0 80px;
   width: 100%;
+
+  @media screen and (min-width: 769px) {
+    padding: 30px 30px 30px 390px;
+  }
 `;
 
 export const Wrapper = styled.div(setWrapperStyles);

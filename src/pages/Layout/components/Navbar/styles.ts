@@ -2,26 +2,36 @@ import { IStyles } from '@app/themes/interfaces';
 import ButtonImported from '@components/Button';
 import styled, { css, FlattenSimpleInterpolation } from 'styled-components';
 
-const setWrapperStyles = ({ theme }: IStyles): FlattenSimpleInterpolation => css`
-  background-color: ${theme.colors.background};
-  height: 100vh;
-  left: 0;
-  padding: 30px 0;
-  position: fixed;
-  top: 0;
-  width: 360px;
+import { INavBarStyles } from './interfaces';
 
-  @media screen and (max-width: 450px) {
-    top: -40px;
-    border-radius: 12px 12px 0 0;
+const setWrapperStyles = ({ theme, isOpenedInMobile }: IStyles & INavBarStyles): FlattenSimpleInterpolation => css`
+  background-color: ${theme.colors.background};
+  border-radius: 12px;
+  box-shadow: inset 0.2rem 0.2rem 0.5rem #c8d0e7, inset -0.2rem -0.2rem 0.5rem #ffffff;
+  padding: 20px 0;
+  position: fixed;
+  top: calc(100% - ${isOpenedInMobile ? '350px' : '80px'});
+  transition: top 0.3s ease-out;
+  width: 100%;
+
+  @media screen and (min-width: 769px) {
+    border-radius: 0;
+    height: 100vh;
+    left: 0;
+    padding: 30px 0;
+    top: 0;
+    width: 360px;
   }
 `;
 
-const setContainerStyles = ({ theme }: IStyles): FlattenSimpleInterpolation => css`
-  border-right: 1px solid ${theme.colors.text};
+const setContainerStyles = (): FlattenSimpleInterpolation => css`
   height: 100%;
-  padding: 0 30px;
+  padding: 0 15px;
   width: 100%;
+
+  @media screen and (min-width: 769px) {
+    padding: 0 30px;
+  }
 `;
 
 const setSearchFormStyles = ({ theme }: IStyles): FlattenSimpleInterpolation => css`
@@ -65,8 +75,44 @@ const setDividerStyles = ({ theme }: IStyles): FlattenSimpleInterpolation => css
   margin-bottom: ${theme.sizes.xl};
 `;
 
+const setAdditionalContainerStyles = (): FlattenSimpleInterpolation => css`
+  display: flex;
+  flex-direction: column;
+
+  div {
+    &:nth-child(1) {
+      order: 2;
+    }
+
+    &:nth-child(2) {
+      order: 1;
+    }
+
+    &:nth-child(3) {
+      order: 0;
+    }
+  }
+
+  @media screen and (min-width: 769px) {
+    div {
+      &:nth-child(1) {
+        order: 0;
+      }
+
+      &:nth-child(2) {
+        order: 1;
+      }
+
+      &:nth-child(3) {
+        order: 2;
+      }
+    }
+  }
+`;
+
 export const Wrapper = styled.div(setWrapperStyles);
 export const Container = styled.div(setContainerStyles);
+export const AdditionalContainer = styled.div(setAdditionalContainerStyles);
 export const SearchForm = styled.form(setSearchFormStyles);
 export const Text = styled.p(setTextStyles);
 export const Checkboxes = styled.div(setCheckboxesStyles);

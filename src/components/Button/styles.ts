@@ -11,7 +11,7 @@ const overrideButtonStyles = ({ $isFullWidth }: IButtonStyles): FlattenSimpleInt
     -0.2rem -0.2rem 0.5rem #ffffff;
   color: #e4ebf5;
   display: flex;
-  height: 2.7rem;
+  height: 42px;
   justify-content: center;
   justify-self: center;
   transition: 0.3s ease;

@@ -48,7 +48,7 @@ const setActivePartStyles = ({ tabCount, activeElement = 1 }: IStyles): FlattenS
   border-radius: 0.8rem;
   box-shadow: inset 0.2rem 0.2rem 0.5rem #c8d0e7, inset -0.2rem -0.2rem 0.5rem #fff;
   height: 2.7rem;
-  margin-left: calc(${activeElement === 0 ? '0.3rem' : '0.6rem'});
+  margin-left: calc(${activeElement === 0 ? '0.4rem' : '1rem'});
   pointer-events: none;
   position: absolute;
   transform: translateX(${activeElement === 0 ? 0 : 100 * activeElement}%);

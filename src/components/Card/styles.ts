@@ -11,6 +11,7 @@ const setColor = ({ theme }: IStyleCard): string => theme.colors.accent;
 export const Link = styled.a`
   height: 300px;
   margin-bottom: 16px;
+  min-width: 390px;
   transition: transform 250ms linear;
   width: 450px;
 
@@ -21,15 +22,10 @@ export const Link = styled.a`
 
   @media ${breakpointFromTablet} {
     width: calc(33% - 14px);
-    margin-right: 16px;
 
     &:hover {
       transform: scale(1.03);
     }
-  }
-
-  &:nth-child(3n) {
-    margin-right: 0;
   }
 `;
 
