@@ -13,12 +13,7 @@ export const Link = styled.a`
   margin-bottom: 16px;
   min-width: 390px;
   transition: transform 250ms linear;
-  width: 450px;
-
-  @media only screen and (max-width: 1367px) and (max-height: 1366px) and (-webkit-min-device-pixel-ratio: 1.5) {
-    width: 390px;
-    height: 250px;
-  }
+  width: 100%;
 
   @media ${breakpointFromTablet} {
     width: calc(33% - 14px);

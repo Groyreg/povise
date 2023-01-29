@@ -10,7 +10,7 @@ const setWrapperStyles = ({ theme, isOpenedInMobile }: IStyles & INavBarStyles):
   box-shadow: inset 0.2rem 0.2rem 0.5rem #c8d0e7, inset -0.2rem -0.2rem 0.5rem #ffffff;
   padding: 20px 0;
   position: fixed;
-  top: calc(100% - ${isOpenedInMobile ? '350px' : '80px'});
+  top: calc(100% - ${isOpenedInMobile ? '370px' : '75px'});
   transition: top 0.3s ease-out;
   width: 100%;
 
