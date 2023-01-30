@@ -25,7 +25,7 @@ const Tabs = ({ tabs, onChange }: IProps): ReactElement => {
   };
 
   const renderTab = ({ isActive, key, value, label }: ITab): ReactElement => (
-    <Tab key={key} htmlFor={key} tabCount={tabs.length}>
+    <Tab key={key} htmlFor={key} isActive={isActive} tabCount={tabs.length}>
       <input checked={isActive} id={key} name={key} onChange={updateActiveTab} type="radio" value={value} />
       <p>{label}</p>
     </Tab>

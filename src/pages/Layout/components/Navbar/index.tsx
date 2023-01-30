@@ -73,6 +73,7 @@ const Navbar = ({ searchVideos, videoData, onCheckboxChange, is4k, isHD, isFullH
             <Tabs onChange={setTabs} tabs={tabs} />
             <Divider />
             <Input
+              autoFocus={true}
               id="search"
               name="search"
               onChange={handleChange}

@@ -12,5 +12,6 @@ export interface ITab {
 
 export interface IStyles {
   activeElement?: number;
+  isActive?: boolean;
   tabCount: number;
 }

@@ -5,7 +5,7 @@ import { OverrideInput, Wrapper } from './styles';
 
 const Input = (props: IProps): ReactElement => (
   <Wrapper>
-    <OverrideInput allowClear={true} {...props} />
+    <OverrideInput allowClear={true} autoFocus={true} {...props} />
   </Wrapper>
 );
 
